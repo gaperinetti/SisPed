@@ -127,17 +127,25 @@ namespace SisPed.Controllers
 
         // POST: Produto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Produto produto)
         {
             try
             {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid) // tratamento campo nulo para nao travar o sistema
+                {
+                    produto = db.Produto.Find(id);
+                    db.Produto.Remove(produto);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                return View(produto);
+
             }
             catch
             {
-                return View();
+                return View(produto);
             }
         }
     }
