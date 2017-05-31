@@ -15,5 +15,7 @@ namespace SisPed.Models
         public DateTime UltimaCompra { get; set; }
         public float Estoque { get; set; }
         public string Comentario { get; set; }
+
+        public virtual ICollection<FornecedorProduto> FornecedorProduto { get; set; }
     }
 }

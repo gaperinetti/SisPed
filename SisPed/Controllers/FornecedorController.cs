@@ -11,107 +11,107 @@ using SisPed.Models;
 
 namespace SisPed.Controllers
 {
-    public class TipoDocumentoController : Controller
+    public class FornecedorController : Controller
     {
         private SisContext db = new SisContext();
 
-        // GET: TipoDocumento
+        // GET: Fornecedor
         public ActionResult Index()
         {
-            return View(db.TipoDocumentoes.ToList());
+            return View(db.Fornecedors.ToList());
         }
 
-        // GET: TipoDocumento/Details/5
+        // GET: Fornecedor/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoDocumento tipoDocumento = db.TipoDocumentoes.Find(id);
-            if (tipoDocumento == null)
+            Fornecedor fornecedor = db.Fornecedors.Find(id);
+            if (fornecedor == null)
             {
                 return HttpNotFound();
             }
-            return View(tipoDocumento);
+            return View(fornecedor);
         }
 
-        // GET: TipoDocumento/Create
+        // GET: Fornecedor/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TipoDocumento/Create
+        // POST: Fornecedor/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TipoDocumentoId,Descricao")] TipoDocumento tipoDocumento)
+        public ActionResult Create([Bind(Include = "FornecedorId,Nome,Endereco,Telefone,Email")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
-                db.TipoDocumentoes.Add(tipoDocumento);
+                db.Fornecedors.Add(fornecedor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tipoDocumento);
+            return View(fornecedor);
         }
 
-        // GET: TipoDocumento/Edit/5
+        // GET: Fornecedor/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoDocumento tipoDocumento = db.TipoDocumentoes.Find(id);
-            if (tipoDocumento == null)
+            Fornecedor fornecedor = db.Fornecedors.Find(id);
+            if (fornecedor == null)
             {
                 return HttpNotFound();
             }
-            return View(tipoDocumento);
+            return View(fornecedor);
         }
 
-        // POST: TipoDocumento/Edit/5
+        // POST: Fornecedor/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TipoDocumentoId,Descricao")] TipoDocumento tipoDocumento)
+        public ActionResult Edit([Bind(Include = "FornecedorId,Nome,Endereco,Telefone,Email")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tipoDocumento).State = EntityState.Modified;
+                db.Entry(fornecedor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tipoDocumento);
+            return View(fornecedor);
         }
 
-        // GET: TipoDocumento/Delete/5
+        // GET: Fornecedor/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoDocumento tipoDocumento = db.TipoDocumentoes.Find(id);
-            if (tipoDocumento == null)
+            Fornecedor fornecedor = db.Fornecedors.Find(id);
+            if (fornecedor == null)
             {
                 return HttpNotFound();
             }
-            return View(tipoDocumento);
+            return View(fornecedor);
         }
 
-        // POST: TipoDocumento/Delete/5
+        // POST: Fornecedor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TipoDocumento tipoDocumento = db.TipoDocumentoes.Find(id);
-            db.TipoDocumentoes.Remove(tipoDocumento);
+            Fornecedor fornecedor = db.Fornecedors.Find(id);
+            db.Fornecedors.Remove(fornecedor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

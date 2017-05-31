@@ -1,41 +1,39 @@
-﻿using SisPed.Context;
-using SisPed.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SisPed.Context;
+using SisPed.Models;
 
 namespace SisPed.Controllers
 {
     public class ProdutoController : Controller
     {
-
-        private BancoSiPedContext db = new BancoSiPedContext();
+        private SisContext db = new SisContext();
 
         // GET: Produto
         public ActionResult Index()
         {
-            return View(db.Produto.ToList()); // Lista os produtos na view
+            return View(db.Produto.ToList());
         }
 
         // GET: Produto/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            if(id == null) // tratamento campo nulo para nao travar o sistema
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var produto = db.Produto.Find(id);//busca id do produto para mostrar detalhes
-
-            if(produto == null) // tratamento campo nulo para nao travar o sistema
+            Produto produto = db.Produto.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-
-            return View(produto); // chama a view detalhes com o produto buscado do id
+            return View(produto);
         }
 
         // GET: Produto/Create
@@ -45,108 +43,86 @@ namespace SisPed.Controllers
         }
 
         // POST: Produto/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(Produto produto)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Descricao,Preco,UltimaCompra,Estoque,Comentario")] Produto produto)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)// SE OS DADOS FORAM VALIDOS?
-                {
-                    db.Produto.Add(produto);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-
-                }
-
-                return View(produto);
+                db.Produto.Add(produto);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            catch
-            {
-                return View(produto);
-            }
+            return View(produto);
         }
 
         // GET: Produto/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null) // tratamento campo nulo para nao travar o sistema
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var produto = db.Produto.Find(id);//busca id do produto para mostrar detalhes
-
-            if (produto == null) // tratamento campo nulo para nao travar o sistema
+            Produto produto = db.Produto.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-
-            return View(produto); // chama a view detalhes com o produto buscado do id
+            return View(produto);
         }
 
-
-
         // POST: Produto/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(Produto produto)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Descricao,Preco,UltimaCompra,Estoque,Comentario")] Produto produto)
         {
-            try
+            if (ModelState.IsValid)
             {
-
-                if (ModelState.IsValid) // tratamento campo nulo para nao travar o sistema
-                {
-                    db.Entry(produto).State = EntityState.Modified; // minha classe de modelo produto sofra uma alteracao
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-
-                return View(produto);
+                db.Entry(produto).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(produto);
         }
 
         // GET: Produto/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null) // tratamento campo nulo para nao travar o sistema
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var produto = db.Produto.Find(id);//busca id do produto para mostrar detalhes
-
-            if (produto == null) // tratamento campo nulo para nao travar o sistema
+            Produto produto = db.Produto.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-
-            return View(produto); // chama a view detalhes com o produto buscado do id
+            return View(produto);
         }
 
         // POST: Produto/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, Produto produto)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
+            Produto produto = db.Produto.Find(id);
+            db.Produto.Remove(produto);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-
-                if (ModelState.IsValid) // tratamento campo nulo para nao travar o sistema
-                {
-                    produto = db.Produto.Find(id);
-                    db.Produto.Remove(produto);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-
-                return View(produto);
-
+                db.Dispose();
             }
-            catch
-            {
-                return View(produto);
-            }
+            base.Dispose(disposing);
         }
     }
 }
