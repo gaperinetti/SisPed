@@ -13,7 +13,7 @@ namespace SisPed.Controllers
 {
     public class FornecedorController : Controller
     {
-        private SisContext db = new SisContext();
+        private SisContextPed db = new SisContextPed();
 
         // GET: Fornecedor
         public ActionResult Index()
