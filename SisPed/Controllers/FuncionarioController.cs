@@ -13,12 +13,13 @@ namespace SisPed.Controllers
 {
     public class FuncionarioController : Controller
     {
-        private BancoContext db = new BancoContext();
+        private BancoSiPedContext db = new BancoSiPedContext();
 
         // GET: Funcionario
         public ActionResult Index()
         {
-            return View(db.Funcionarios.ToList());
+            var funcionarios = db.Funcionarios.Include(f => f.TipoDocumento);
+            return View(funcionarios.ToList());
         }
 
         // GET: Funcionario/Details/5
@@ -39,6 +40,7 @@ namespace SisPed.Controllers
         // GET: Funcionario/Create
         public ActionResult Create()
         {
+            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace SisPed.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FuncionarioId,Nome,Sobrenome,Email,Nascimento")] Funcionario funcionario)
+        public ActionResult Create([Bind(Include = "FuncionarioId,Nome,Sobrenome,Email,Nascimento,TipoDocumentoId")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace SisPed.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", funcionario.TipoDocumentoId);
             return View(funcionario);
         }
 
@@ -71,6 +74,7 @@ namespace SisPed.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", funcionario.TipoDocumentoId);
             return View(funcionario);
         }
 
@@ -79,7 +83,7 @@ namespace SisPed.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FuncionarioId,Nome,Sobrenome,Email,Nascimento")] Funcionario funcionario)
+        public ActionResult Edit([Bind(Include = "FuncionarioId,Nome,Sobrenome,Email,Nascimento,TipoDocumentoId")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace SisPed.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", funcionario.TipoDocumentoId);
             return View(funcionario);
         }
 

@@ -14,6 +14,7 @@ namespace SisPed.Models
         public string Sobrenome { get; set; }
         public string Email { get; set; }
         public DateTime Nascimento { get; set; }
+        public int TipoDocumentoId { get; set; }
 
 
 
