@@ -17,5 +17,6 @@ namespace SisPed.Models
         public string Comentario { get; set; }
 
         public virtual ICollection<FornecedorProduto> FornecedorProduto { get; set; }
+        public virtual ICollection<OrdemDetalhe> OrdensDetalhes { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace SisPed.Controllers
 {
     public class TipoDocumentoController : Controller
     {
-        private SisContextPed db = new SisContextPed();
+        private ContextPed db = new ContextPed();
 
         // GET: TipoDocumento
         public ActionResult Index()

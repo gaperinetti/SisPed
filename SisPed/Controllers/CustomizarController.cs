@@ -11,112 +11,112 @@ using SisPed.Models;
 
 namespace SisPed.Controllers
 {
-    public class FuncionarioController : Controller
+    public class CustomizarController : Controller
     {
         private ContextPed db = new ContextPed();
 
-        // GET: Funcionario
+        // GET: Customizar
         public ActionResult Index()
         {
-            var funcionarios = db.Funcionarios.Include(f => f.TipoDocumento);
-            return View(funcionarios.ToList());
+            var customizars = db.Customizars.Include(c => c.TipoDocumento);
+            return View(customizars.ToList());
         }
 
-        // GET: Funcionario/Details/5
+        // GET: Customizar/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Funcionario funcionario = db.Funcionarios.Find(id);
-            if (funcionario == null)
+            Customizar customizar = db.Customizars.Find(id);
+            if (customizar == null)
             {
                 return HttpNotFound();
             }
-            return View(funcionario);
+            return View(customizar);
         }
 
-        // GET: Funcionario/Create
+        // GET: Customizar/Create
         public ActionResult Create()
         {
             ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao");
             return View();
         }
 
-        // POST: Funcionario/Create
+        // POST: Customizar/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FuncionarioId,Nome,Sobrenome,Email,Nascimento,TipoDocumentoId")] Funcionario funcionario)
+        public ActionResult Create([Bind(Include = "CustomizarId,Nome,Endereco,Telefone,Email,Documento,TipoDocumentoId")] Customizar customizar)
         {
             if (ModelState.IsValid)
             {
-                db.Funcionarios.Add(funcionario);
+                db.Customizars.Add(customizar);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", funcionario.TipoDocumentoId);
-            return View(funcionario);
+            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", customizar.TipoDocumentoId);
+            return View(customizar);
         }
 
-        // GET: Funcionario/Edit/5
+        // GET: Customizar/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Funcionario funcionario = db.Funcionarios.Find(id);
-            if (funcionario == null)
+            Customizar customizar = db.Customizars.Find(id);
+            if (customizar == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", funcionario.TipoDocumentoId);
-            return View(funcionario);
+            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", customizar.TipoDocumentoId);
+            return View(customizar);
         }
 
-        // POST: Funcionario/Edit/5
+        // POST: Customizar/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FuncionarioId,Nome,Sobrenome,Email,Nascimento,TipoDocumentoId")] Funcionario funcionario)
+        public ActionResult Edit([Bind(Include = "CustomizarId,Nome,Endereco,Telefone,Email,Documento,TipoDocumentoId")] Customizar customizar)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(funcionario).State = EntityState.Modified;
+                db.Entry(customizar).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", funcionario.TipoDocumentoId);
-            return View(funcionario);
+            ViewBag.TipoDocumentoId = new SelectList(db.TipoDocumentoes, "TipoDocumentoId", "Descricao", customizar.TipoDocumentoId);
+            return View(customizar);
         }
 
-        // GET: Funcionario/Delete/5
+        // GET: Customizar/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Funcionario funcionario = db.Funcionarios.Find(id);
-            if (funcionario == null)
+            Customizar customizar = db.Customizars.Find(id);
+            if (customizar == null)
             {
                 return HttpNotFound();
             }
-            return View(funcionario);
+            return View(customizar);
         }
 
-        // POST: Funcionario/Delete/5
+        // POST: Customizar/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Funcionario funcionario = db.Funcionarios.Find(id);
-            db.Funcionarios.Remove(funcionario);
+            Customizar customizar = db.Customizars.Find(id);
+            db.Customizars.Remove(customizar);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
