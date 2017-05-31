@@ -23,6 +23,19 @@ namespace SisPed.Controllers
             return View(ordemView);
         }
 
+        [HttpPost]
+        public ActionResult NovaOrdem(OrdemView ordemView)
+        {
+            //ViewBag.CustomizarId = new SelectList(db.Customizars.OrderBy(c => c.Nome), "CustomizarId", "Nome", ordemView.Customizar.CustomizarId);
+            return View(ordemView);
+        }
+
+        public ActionResult AdicionarProduto(ProdutoOrdem produtoOrdem)
+        {
+            ViewBag.Id = new SelectList(db.Produto.OrderBy(c => c.Descricao), "Id", "Descricao", produtoOrdem.Id);
+            return View(produtoOrdem);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
