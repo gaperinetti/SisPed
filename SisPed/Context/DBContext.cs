@@ -8,7 +8,7 @@ using System.Web;
 
 namespace SisPed.Context
 {
-    public class SisPedContext : DbContext // classe que recebe informacao do banco de dados
+    public class BancoContext : DbContext // classe que recebe informacao do banco de dados
     {
         public DbSet<Produto> Produto { get; set; } // referencia  Modelo Produto
 
@@ -17,5 +17,9 @@ namespace SisPed.Context
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<SisPed.Models.TipoDocumento> TipoDocumentoes { get; set; }
+
+        public System.Data.Entity.DbSet<SisPed.Models.Funcionario> Funcionarios { get; set; }
     }
 }
