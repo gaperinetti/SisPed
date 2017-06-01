@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SisPed.Models.Fornecedor>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Fornecedores";
 }
 
-<h2>Index</h2>
+<h2>Lista de Fornecedores</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Fornecedor", "Create")
 </p>
 <table class="table">
     <tr>
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FornecedorId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FornecedorId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FornecedorId })
+            @Html.ActionLink("Alterar", "Edit", new { id=item.FornecedorId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.FornecedorId }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.FornecedorId })
         </td>
     </tr>
 }

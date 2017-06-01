@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SisPed.Models.Produto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Produtos";
 }
 
-<h2>Index</h2>
+<h2>Lista de Produtos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Produto", "Create")
 </p>
 <table class="table">
     <tr>
@@ -18,13 +18,13 @@
             @Html.DisplayNameFor(model => model.Preco)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UltimaCompra)
+            @Html.DisplayName("Última Compra")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Estoque)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Comentario)
+            @Html.DisplayName("Comentário")
         </th>
         <th></th>
     </tr>
@@ -47,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.Comentario)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Alterar", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

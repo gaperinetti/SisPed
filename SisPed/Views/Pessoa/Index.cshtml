@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SisPed.Models.Customizar>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Clientes";
 }
 
-<h2>Index</h2>
+<h2>Lista de Clientes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Cliente", "Create")
 </p>
 <table class="table">
     <tr>
@@ -53,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.Documento)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CustomizarId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CustomizarId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CustomizarId })
+            @Html.ActionLink("Alterar", "Edit", new { id=item.CustomizarId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.CustomizarId }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.CustomizarId })
         </td>
     </tr>
 }
