@@ -13,7 +13,7 @@ namespace SisPed.Controllers
 {
     public class PessoaController : Controller
     {
-        private ContextPed db = new ContextPed();
+        private SisPedidoContext db = new SisPedidoContext();
 
         // GET: Pessoa
         public ActionResult Index()

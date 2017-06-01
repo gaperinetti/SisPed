@@ -13,7 +13,7 @@ namespace SisPed.Controllers
 {
     public class FuncionarioController : Controller
     {
-        private ContextPed db = new ContextPed();
+        private SisPedidoContext db = new SisPedidoContext();
 
         // GET: Funcionario
         public ActionResult Index()

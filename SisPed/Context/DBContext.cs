@@ -8,7 +8,7 @@ using System.Web;
 
 namespace SisPed.Context
 {
-    public class ContextPed : DbContext // classe que recebe informacao do banco de dados
+    public class SisPedidoContext : DbContext // classe que recebe informacao do banco de dados
     {
         public DbSet<Produto> Produto { get; set; } // referencia  Modelo Produto
 

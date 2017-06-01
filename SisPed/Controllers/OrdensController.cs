@@ -10,7 +10,7 @@ namespace SisPed.Controllers
 {
     public class OrdensController : Controller
     {
-        private ContextPed db = new ContextPed();
+        private SisPedidoContext db = new SisPedidoContext();
 
         // GET: Ordens
         public ActionResult NovaOrdem()

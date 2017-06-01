@@ -16,7 +16,6 @@ namespace SisPed.Models
         public float Estoque { get; set; }
         public string Comentario { get; set; }
 
-        public virtual ICollection<FornecedorProduto> FornecedorProduto { get; set; }
-        public virtual ICollection<OrdemDetalhe> OrdensDetalhes { get; set; }
+      
     }
 }

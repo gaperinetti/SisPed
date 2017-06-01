@@ -15,7 +15,7 @@ namespace SisPed.Models
         public string Telefone { get; set; }
         public string Email { get; set; }
 
-        public virtual ICollection<FornecedorProduto> FornecedorProduto { get; set; }
+        
 
     }
 }
